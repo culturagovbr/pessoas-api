@@ -1,0 +1,4 @@
+// Cadastrar
+{"banco":{"nrBanco":"003"},"agencia":{"idAgencia":1},"nrContaCorrente":"3965-0","stContaCorrentePrincipal":"S","pessoa":{"idPessoa":1}}
+// Alterar
+{"idContaCorrente":???,"banco":{"nrBanco":"003"},"agencia":{"idAgencia":1},"nrContaCorrente":"3965-0","stContaCorrentePrincipal":"S","pessoa":{"idPessoa":1}}

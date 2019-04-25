@@ -1,0 +1,9 @@
+{
+  "idPessoaFisica": 1,
+  "cor": {
+    "idCor": 4
+  },
+  "pais": {
+    "sgPais": "BRA"
+  }
+}

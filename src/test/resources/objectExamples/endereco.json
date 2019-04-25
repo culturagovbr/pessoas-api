@@ -1,0 +1,26 @@
+// Cadastrar
+{"dsComplementoEndereco": "TESTE INCLUIR","nrComplemento": "10","dsLograEndereco": null,"dsBairroEndereco": null, "pessoa": {"idPessoa": 3823}, "tipoEndereco": {"cdTipoEndereco": "01"},"subdistritoIbge": null,"logradouro": {"idLogradouro": 3096778},"bairro": {"idBairro": 1129},"servico": 100}
+// Alterar
+{"idEndereco":???,"dsComplementoEndereco": "TESTE ALTERAR","nrComplemento": "10","dsLograEndereco": null,"dsBairroEndereco": null, "pessoa": {"idPessoa": 3823}, "tipoEndereco": {"cdTipoEndereco": "01"},"subdistritoIbge": null,"logradouro": {"idLogradouro": 3096778},"bairro": {"idBairro": 1129},"servico": 100}
+
+
+{
+"idEndereco":???,
+"dsComplementoEndereco": "TESTE ALTERAR",
+"nrComplemento": "10",
+"dsLograEndereco": null,
+"dsBairroEndereco": null,
+"pessoa": {
+  "idPessoa": 3823
+}, 
+"tipoEndereco": {
+  "cdTipoEndereco": "01"
+},
+"subdistritoIbge": null,
+"logradouro": {
+  "idLogradouro": 3096778
+},
+"bairro": {
+  "idBairro": 1129
+}
+}

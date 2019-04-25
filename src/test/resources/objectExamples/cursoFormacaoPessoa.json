@@ -1,0 +1,23 @@
+// Cadastrar
+{"pessoaFisica":{"idPessoaFisica":1},"cursoFormacao":{"idCursoFormacao":1},"pais":{"sgPais":"USA"},"nmInstituicaoEnsino":"Instituição Kabulosa Ao Cubo","dsTituloAcademico":"Curso Sinistro Ao Quarado","nrCargaHoraria":"800h","aaInicioCurso":2010,"aaFimCurso":2014}
+// Alterar
+{"idCursoFormacaoPessoa":"???","pessoaFisica":{"idPessoaFisica":1},"cursoFormacao":{"idCursoFormacao":1},"pais":{"sgPais":"USA"},"nmInstituicaoEnsino":"Instituição Kabulosa Ao Cubo","dsTituloAcademico":"Curso Sinistro Ao Quarado","nrCargaHoraria":"800h","aaInicioCurso":2010,"aaFimCurso":2014}
+
+
+{
+  "idCursoFormacaoPessoa":"???",
+  "pessoaFisica":{
+    "idPessoaFisica":1
+  },
+  "cursoFormacao":{
+    "idCursoFormacao":1
+  },
+  "pais":{
+    "sgPais":"USA"
+  },
+  "nmInstituicaoEnsino":"Instituição Kabulosa Ao Cubo",
+  "dsTituloAcademico":"Curso Sinistro Ao Quarado",
+  "nrCargaHoraria":"800h",
+  "aaInicioCurso":2010,
+  "aaFimCurso":2014
+}

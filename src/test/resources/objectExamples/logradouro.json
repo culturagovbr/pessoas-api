@@ -1,0 +1,27 @@
+// CADASTRAR
+{
+"nmLogradouro": "TESTE",
+"nmAbrevLogradouro": "TESTE",
+"dsTipoLogradouro": "TESTE",
+"stLogradouro": "T",
+"dsComplemento": "TESTE",
+"nrCep": "9999999",
+"tpCep": 1,
+"stAtualizacao": "S",
+"nrCpc": "3444",
+"nrSecaoInicial": "1",
+"nrSecaoFinal": "233",
+"tpParidade": "I",
+"uf": {
+  "sgUf": "DF"
+},
+"municipio": {
+  "idMunicipio": 1778
+},
+"bairroInicio": {
+  "idBairro": 13960
+},
+"bairroFim": {
+  "idBairro": 13966
+}
+}

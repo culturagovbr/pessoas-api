@@ -1,0 +1,6 @@
+<jboss-web>
+	<context-root>pessoa-ws</context-root>
+	<security-domain>form-auth</security-domain>
+	<disable-audit>true</disable-audit>
+</jboss-web>
+

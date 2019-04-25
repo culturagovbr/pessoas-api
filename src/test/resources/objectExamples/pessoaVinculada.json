@@ -1,0 +1,12 @@
+{"id":{"idPessoa":3823,"idTipoVinculoPessoa":17,"idPessoaVinculada":3824},"dtInicio":"01/01/2012","dtFim":"01/01/2020","stPessoaVinculada":"A"}
+
+{
+"id":{
+  "idPessoa":3823,
+  "idTipoVinculoPessoa":17,
+  "idPessoaVinculada":3824
+},
+"dtInicio":"01/01/2012",
+"dtFim":"01/01/2020",
+"stPessoaVinculada":"A"
+}

@@ -1,0 +1,21 @@
+// Cadastrar
+{"pessoaFisica":{"idPessoaFisica":1},"idioma":{"idIdioma":4},"nmEstabelecimentoEnsino":"FISK - Inglês e Goianês é FISK","stEntende":"B","stFala":"B","stLe":"B","stEscreve":"B","stDominioPortugues":"B"}
+// Alterar
+{"idIdiomaPessoa":???,"pessoaFisica":{"idPessoaFisica":1},"idioma":{"idIdioma":4},"nmEstabelecimentoEnsino":"FISK - Inglês e Goianês é FISK","stEntende":"B","stFala":"B","stLe":"B","stEscreve":"B","stDominioPortugues":"B"}
+
+
+{
+"idIdiomaPessoa":8,
+"pessoaFisica":{
+  "idPessoaFisica":1
+},
+"idioma":{
+  "idIdioma":3
+},
+"nmEstabelecimentoEnsino":"FISK - Inglês e Goianês é FISK",
+"stEntende":"B",
+"stFala":"B",
+"stLe":"B",
+"stEscreve":"B",
+"stDominioPortugues":"B"
+}

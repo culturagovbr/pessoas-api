@@ -1,0 +1,36 @@
+{"idPessoaFisica":7,"ufTituloEleitoral":{"sgUf":"DF"},"ufConselhoClasse":{"sgUf":"SP"},"ufCarteiraTrabalho":{"sgUf":"RJ"},"ufIdentidade":{"sgUf":"RJ"},"nrTituloEleitor":"0015042032003","nrZonaTituloEleitor":"08 ","nrSecaoTituloEleitor":"141 ","dtExpTituloEleitor":"28/08/2012","nrCertificadoReservista":"0054654","nmExpCertificadoReservista":"565464","dtExpCertificadoReservista":"11/02/1992","nrHabilitacao":"365687433","dsCategoriaHabilitacao":"AB","nrCarteiraConselhoClasse":"12345","nmExpConselhoClasse":"CON","dsRegiaoReservista":"REG  ","cdCategoriaReservista":"1 ","nrCarteiraTrabalho":"0754310937 ","nrSerieCarteiraTrabalho":"1087 ","nrRg":"2929725","nmOrgaoExpRg":"SSP","dtExpedicaoRg":"22/01/2007","nrPisPasep":"10935705"}
+
+{
+  "idPessoaFisica":12,
+  "ufTituloEleitoral":{
+    "sgUf":"DF"
+  },
+  "ufConselhoClasse":{
+    "sgUf":"SP"
+  },
+  "ufCarteiraTrabalho":{
+    "sgUf":"RJ"
+  },
+  "ufIdentidade":{
+    "sgUf":"RJ"
+  },
+  "nrTituloEleitor":"0015042032003",
+  "nrZonaTituloEleitor":"08",
+  "nrSecaoTituloEleitor":"141",
+  "dtExpTituloEleitor":"28/08/2012",
+  "nrCertificadoReservista":"0054654",
+  "nmExpCertificadoReservista":"565464",
+  "dtExpCertificadoReservista":"11/02/1992",
+  "nrHabilitacao":"365687433",
+  "dsCategoriaHabilitacao":"AB",
+  "nrCarteiraConselhoClasse":"12345",
+  "nmExpConselhoClasse":"CON",
+  "dsRegiaoReservista":"REG",
+  "cdCategoriaReservista":"1",
+  "nrCarteiraTrabalho":"0754310937",
+  "nrSerieCarteiraTrabalho":"1087",
+  "nrRg":"2929725",
+  "nmOrgaoExpRg":"SSP",
+  "dtExpedicaoRg":"22/01/2007",
+  "nrPisPasep":"10935705"
+}

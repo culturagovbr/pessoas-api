@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://wadl.dev.java.net/2009/02">
+	<doc jersey:generatedBy="Jersey: 1.18.1 02/19/2014 03:28 AM" xmlns:jersey="http://jersey.java.net/" />
+	<grammars>
+		<include href="pessoa.xsd" />
+	</grammars>
+	<resources base="http://10.0.0.225:8080/minc-pessoa/servicos">
+		<resource path="/pessoa_fisica">
+			<resource path="/consultar/{cpf}">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaTudo" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/basico">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaBasico" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/endereco">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaEndereco" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/formacao">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaFormacao" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/documentacao">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaDocumentacao" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/caracteristica_fisica">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaCaracteristicaFisica" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/informacao_bancaria">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaInformacaoBancaria" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cpf}/vinculo_pessoa">
+				<param name="cpf" style="template" type="xs:string"
+					xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaFisicaVinculoPessoa" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/verificar_situacao_cadastral/{cpf}/{hash}">
+				<param name="hash" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="verificarSituacaoCadastralPessoaFisica" name="GET">
+					<response>
+						<ns2:representation element="situacaoCadastralPF" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar/{cpf}">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="atualizarPessoaFisica" name="PUT">
+					<request>
+						<representation mediaType="application/json" />
+					</request>
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/pessoa_juridica">
+			<resource path="/consultar/{cnpj}">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaJuridicaTudo" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaJuridica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cnpj}/basico">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaJuridicaBasico" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaJuridica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cnpj}/endereco">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaJuridicaEndereco" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaJuridica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cnpj}/vinculo_pessoa">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaJuridicaVinculoPessoa" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaJuridica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{cnpj}/informacao_bancaria">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaJuridicaInformacaoBancaria" name="GET">
+					<request>
+						<param name="forcarBuscaNaReceita" style="query" type="xs:boolean"
+							xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					</request>
+					<response>
+						<ns2:representation element="XXXXXXXXXX" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/verificar_situacao_cadastral/{cnpj}/{hash}">
+				<param name="hash" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="verificarSituacaoCadastralPessoaJuridica" name="GET">
+					<response>
+						<ns2:representation element="pessoaJuridica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/pessoa_estrangeira">
+			<resource path="/consultar/{nrIdentificacao}">
+				<param name="nrIdentificacao" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaEstrangeira" name="GET">
+					<response>
+						<ns2:representation element="XXXXXXXXXX" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirPessoaEstrangeira" name="POST">
+					<request>
+						<ns2:representation element="pessoaEstrangeira" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaEstrangeira" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarPessoaEstrangeira" name="PUT">
+					<request>
+						<ns2:representation element="pessoaEstrangeira" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaEstrangeira" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/municipio">
+			<resource path="/consultar/{sgUf}">
+				<param name="sgUf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="listarMunicipios" name="GET">
+					<response>
+						<ns2:representation element="municipio" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/banco">
+			<resource path="/atualizar">
+				<method id="atualizarBanco" name="PUT">
+					<request>
+						<ns2:representation element="banco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="banco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar">
+				<method id="listarBancos" name="GET">
+					<response>
+						<ns2:representation element="banco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirBanco" name="POST">
+					<request>
+						<ns2:representation element="banco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="banco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{nrBanco}">
+				<param name="nrBanco" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarBanco" name="GET">
+					<response>
+						<ns2:representation element="banco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{nrBanco}">
+				<param name="nrBanco" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirBanco" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/formacao">
+			<resource path="/cadastrar">
+				<method id="inserirCursoFormacaoPessoa" name="POST">
+					<request>
+						<ns2:representation element="pessoaCursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaCursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarCursoFormacaoPessoa" name="PUT">
+					<request>
+						<ns2:representation element="pessoaCursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaCursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirCursoFormacaoPessoa" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/curso_nivel_formacao">
+			<resource path="/consultar">
+				<method id="listarCursoNiveisFormacao" name="GET">
+					<response>
+						<ns2:representation element="cursoNivelFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarCursoNivelFormacao" name="GET">
+					<response>
+						<ns2:representation element="cursoNivelFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirCursoNivelFormacao" name="POST">
+					<request>
+						<ns2:representation element="cursoNivelFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="cursoNivelFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarCursoNivelFormacao" name="PUT">
+					<request>
+						<ns2:representation element="cursoNivelFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="cursoNivelFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirCursoNivelFormacao" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/tipo_abrangencia">
+			<resource path="/consultar">
+				<method id="listarTiposAbrangencia" name="GET">
+					<response>
+						<ns2:representation element="tipoAbrangencia" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/agencia">
+			<resource path="/consultar/{idAgencia}">
+				<param name="idAgencia" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarAgencia" name="GET">
+					<response>
+						<ns2:representation element="agencia" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/banco/{nrBanco}">
+				<param name="nrBanco" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="listarAgenciasPorBanco" name="GET">
+					<response>
+						<ns2:representation element="agencia" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirAgencia" name="POST">
+					<request>
+						<ns2:representation element="agencia" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="agencia" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarAgencia" name="PUT">
+					<request>
+						<ns2:representation element="agencia"
+							mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02"
+							xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="agencia" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirAgencia" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/bairro">
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarBairro" name="GET">
+					<response>
+						<ns2:representation element="bairro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarBairro" name="PUT">
+					<request>
+						<ns2:representation element="bairro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="bairro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirBairro" name="POST">
+					<request>
+						<ns2:representation element="bairro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="bairro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirBairro" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/tipo_endereco">
+			<resource path="/consultar">
+				<method id="listarTipoEndereco" name="GET">
+					<response>
+						<ns2:representation element="tipoEndereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{tpPessoa}">
+				<param name="tpPessoa" style="template" type="xs:string"
+					xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="listarTipoEnderecoPorTipoPessoa" name="GET">
+					<response>
+						<ns2:representation element="tipoEndereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/tipo_telefone">
+			<resource path="/consultar/">
+				<method id="listarTiposTelefone" name="GET">
+					<response>
+						<ns2:representation element="tipoTelefone"
+							mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02"
+							xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/pessoa_vinculada">
+			<resource path="/consultar/{idPessoa}/{idPessoaVinculada}/{idTipoVinculoPessoa}">
+				<param name="idPessoa" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="idTipoVinculoPessoa" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="idPessoaVinculada" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarPessoaVinculada" name="GET">
+					<response>
+						<ns2:representation element="pessoaVinculada" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirPessoaVinculada" name="POST">
+					<request>
+						<ns2:representation element="pessoaVinculada" ediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaVinculada" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource
+				path="/atualizar/{idPessoa}/{idPessoaVinculada}/{idTipoVinculoPessoa}">
+				<param name="idPessoa" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="idTipoVinculoPessoa" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="idPessoaVinculada" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="atualizarPessoaVinculada" name="PUT">
+					<request>
+						<ns2:representation element="pessoaVinculada" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="pessoaVinculada" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource
+				path="/deletar/{idPessoa}/{idPessoaVinculada}/{idTipoVinculoPessoa}">
+				<param name="idPessoa" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="idTipoVinculoPessoa" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<param name="idPessoaVinculada" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirPessoaVinculada" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/idioma_pessoa">
+			<resource path="/consultar/{cpf}">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarIdiomaPessoa" name="GET">
+					<response>
+						<ns2:representation element="idiomaPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirIdiomaPessoa" name="POST">
+					<request>
+						<ns2:representation element="idiomaPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="idiomaPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarIdiomaPessoa" name="PUT">
+					<request>
+						<ns2:representation element="idiomaPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="idiomaPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirIdiomaPessoa" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/tipo_vinculo">
+			<resource path="/consultar">
+				<method id="listarTiposVinculoPessoa" name="GET">
+					<response>
+						<ns2:representation element="tipoVinculoPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/tipo_pessoa">
+			<resource path="/consultar/">
+				<method id="listarTiposPessoa" name="GET">
+					<response>
+						<ns2:representation element="tipoPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/conta_corrente">
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarContaCorrente" name="GET">
+					<response>
+						<ns2:representation element="contaCorrente" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirContaCorrente" name="POST">
+					<request>
+						<ns2:representation element="contaCorrente" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="contaCorrente" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarContaCorrente" name="PUT">
+					<request>
+						<ns2:representation element="contaCorrente" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="contaCorrente" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirContaCorrente" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/logradouro">
+			<resource path="/consultar/{cep}">
+				<param name="cep" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarLogradouro" name="GET">
+					<response>
+						<ns2:representation element="logradouro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirLogradouro" name="POST">
+					<request>
+						<ns2:representation element="logradouro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="logradouro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarLogradouro" name="PUT">
+					<request>
+						<ns2:representation element="logradouro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="logradouro" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirLogradouro" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/tipo_email">
+			<resource path="/consultar">
+				<method id="listarTiposEmail" name="GET">
+					<response>
+						<ns2:representation element="tipoEmail" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/endereco">
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarEndereco" name="GET">
+					<response>
+						<ns2:representation element="endereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirEndereco" name="POST">
+					<request>
+						<ns2:representation element="endereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="endereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarEndereco" name="PUT">
+					<request>
+						<ns2:representation element="endereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="endereco" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirEndereco" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/documentacao_pessoa">
+			<resource path="/cadastrar">
+				<method id="inserirDocumentacaoPessoa" name="POST">
+					<request>
+						<ns2:representation element="documentacaoPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="documentacaoPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarDocumentacaoPessoa" name="PUT">
+					<request>
+						<ns2:representation element="documentacaoPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="documentacaoPessoa" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirDocumentacaoPessoa" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/email">
+			<resource path="/consultar/pessoa_fisica/{cpf}">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarEmailPessoaFisica" name="GET">
+					<response>
+						<ns2:representation element="email" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/pessoa_juridica/{cnpj}">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarEmailPessoaJuridica" name="GET">
+					<response>
+						<ns2:representation element="email" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarEmail" name="PUT">
+					<request>
+						<ns2:representation element="email" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="email" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirEmail" name="POST">
+					<request>
+						<ns2:representation element="email" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="email" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirEmail" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/escolaridade">
+			<resource path="/consultar">
+				<method id="listarEscolaridades" name="GET">
+					<response>
+						<ns2:representation element="escolaridade" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/curso">
+			<resource path="/atualizar">
+				<method id="atualizarCurso" name="PUT">
+					<request>
+						<ns2:representation element="curso" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="curso" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirCurso" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar">
+				<method id="listarCursos" name="GET">
+					<response>
+						<ns2:representation element="curso" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarCurso" name="GET">
+					<response>
+						<ns2:representation element="curso" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirCurso" name="POST">
+					<request>
+						<ns2:representation element="curso" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="curso" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/curso_formacao">
+			<resource path="/consultar">
+				<method id="listarCursoFormacao" name="GET">
+					<response>
+						<ns2:representation element="cursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int"
+					xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarCursoFormacao" name="GET">
+					<response>
+						<ns2:representation element="cursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirCursoFormacao" name="POST">
+					<request>
+						<ns2:representation element="cursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="cursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarCursoFormacao" name="PUT">
+					<request>
+						<ns2:representation element="cursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="cursoFormacao" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirCurso" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/caracteristica_fisica">
+			<resource path="/atualizar">
+				<method id="atualizarCaracteristicaFisica" name="PUT">
+					<request>
+						<ns2:representation element="caracteristicaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="caracteristicaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirCaracteristicaFisica" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirCaracteristicaFisica" name="POST">
+					<request>
+						<ns2:representation element="caracteristicaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="caracteristicaFisica" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/curso_area">
+			<resource path="/consultar">
+				<method id="listarCursoAreas" name="GET">
+					<response>
+						<ns2:representation element="cursoArea" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarCursoArea" name="GET">
+					<response>
+						<ns2:representation element="cursoArea" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirCursoArea" name="POST">
+					<request>
+						<ns2:representation element="cursoArea" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="cursoArea" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarCursoArea" name="PUT">
+					<request>
+						<ns2:representation element="cursoArea" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="cursoArea" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirCursoArea" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/estado_civil">
+			<resource path="/consultar">
+				<method id="listarEstadoCivil" name="GET">
+					<response>
+						<ns2:representation element="estadoCivil" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/pais">
+			<resource path="/consultar">
+				<method id="listarPaises" name="GET">
+					<response>
+						<ns2:representation element="pais" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/idioma">
+			<resource path="/consultar">
+				<method id="listarIdiomas" name="GET">
+					<response>
+						<ns2:representation element="idioma" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+		
+		<resource path="/telefone">
+			<resource path="/consultar/pessoa_fisica/{cpf}">
+				<param name="cpf" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarTelefonePessoaFisica" name="GET">
+					<response>
+						<ns2:representation element="telefone" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/consultar/pessoa_juridica/{cnpj}">
+				<param name="cnpj" style="template" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="retornarTelefonePessoaJuridica" name="GET">
+					<response>
+						<ns2:representation element="telefone" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/cadastrar">
+				<method id="inserirTelefone" name="POST">
+					<request>
+						<ns2:representation element="telefone" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="telefone" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/atualizar">
+				<method id="atualizarTelefone" name="PUT">
+					<request>
+						<ns2:representation element="telefone" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</request>
+					<response>
+						<ns2:representation element="telefone" mediaType="application/json" xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" />
+					</response>
+				</method>
+			</resource>
+			<resource path="/deletar/{id}">
+				<param name="id" style="template" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+				<method id="excluirTelefone" name="DELETE">
+					<response>
+						<representation mediaType="application/json" />
+					</response>
+				</method>
+			</resource>
+		</resource>
+	</resources>
+</application>

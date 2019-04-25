@@ -1,0 +1,1251 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="agencia" type="agencia"/>
+
+  <xs:element name="bairro" type="bairro"/>
+
+  <xs:element name="banco" type="banco"/>
+
+  <xs:element name="caracteristicaFisica" type="caracteristicaFisica"/>
+
+  <xs:element name="cbo" type="cbo"/>
+
+  <xs:element name="cnae" type="cnae"/>
+
+  <xs:element name="contaCorrente" type="contaCorrente"/>
+
+  <xs:element name="cor" type="cor"/>
+
+  <xs:element name="curso" type="curso"/>
+
+  <xs:element name="cursoArea" type="cursoArea"/>
+
+  <xs:element name="cursoFormacao" type="cursoFormacao"/>
+
+  <xs:element name="cursoNivelFormacao" type="cursoNivelFormacao"/>
+
+  <xs:element name="ddd" type="ddd"/>
+
+  <xs:element name="distritoIbge" type="distritoIbge"/>
+
+  <xs:element name="documentacaoPessoa" type="documentacaoPessoa"/>
+
+  <xs:element name="email" type="email"/>
+
+  <xs:element name="endereco" type="endereco"/>
+
+  <xs:element name="escolaridade" type="escolaridade"/>
+
+  <xs:element name="estadoCivil" type="estadoCivil"/>
+
+  <xs:element name="idioma" type="idioma"/>
+
+  <xs:element name="idiomaPessoa" type="idiomaPessoa"/>
+
+  <xs:element name="logradouro" type="logradouro"/>
+
+  <xs:element name="mesoregiao" type="mesoregiao"/>
+
+  <xs:element name="microregiao" type="microregiao"/>
+
+  <xs:element name="municipio" type="municipio"/>
+
+  <xs:element name="naturezaJuridica" type="naturezaJuridica"/>
+
+  <xs:element name="nivelEscolaridade" type="nivelEscolaridade"/>
+
+  <xs:element name="pais" type="pais"/>
+
+  <xs:element name="pessoa" type="pessoa"/>
+
+  <xs:element name="pessoaCursoFormacao" type="pessoaCursoFormacao"/>
+
+  <xs:element name="pessoaEstrangeira" type="pessoaEstrangeira"/>
+
+  <xs:element name="pessoaFisica" type="pessoaFisica"/>
+
+  <xs:element name="pessoaFisicaJuridicaCbo" type="pessoaFisicaJuridicaCbo"/>
+
+  <xs:element name="pessoaJuridica" type="pessoaJuridica"/>
+
+  <xs:element name="pessoaJuridicaCnae" type="pessoaJuridicaCnae"/>
+
+  <xs:element name="pessoaVinculada" type="pessoaVinculada"/>
+
+  <xs:element name="regiao" type="regiao"/>
+
+  <xs:element name="situacaoCadastralPF" type="situacaoCadastralPF"/>
+
+  <xs:element name="situacaoCadastralPJ" type="situacaoCadastralPJ"/>
+
+  <xs:element name="situacaoMunicipio" type="situacaoMunicipio"/>
+
+  <xs:element name="subdistritoIbge" type="subdistritoIbge"/>
+
+  <xs:element name="telefone" type="telefone"/>
+
+  <xs:element name="tipoAbrangencia" type="tipoAbrangencia"/>
+
+  <xs:element name="tipoEmail" type="tipoEmail"/>
+
+  <xs:element name="tipoEndereco" type="tipoEndereco"/>
+
+  <xs:element name="tipoLucro" type="tipoLucro"/>
+
+  <xs:element name="tipoPessoa" type="tipoPessoa"/>
+
+  <xs:element name="tipoSituacaoCadastralPF" type="tipoSituacaoCadastralPF"/>
+
+  <xs:element name="tipoSituacaoCadastralPJ" type="tipoSituacaoCadastralPJ"/>
+
+  <xs:element name="tipoTelefone" type="tipoTelefone"/>
+
+  <xs:element name="tipoVinculoPessoa" type="tipoVinculoPessoa"/>
+
+  <xs:element name="uf" type="uf"/>
+
+  <xs:complexType name="telefone">
+    <xs:sequence>
+      <xs:element ref="ddd" minOccurs="0"/>
+      <xs:element name="idTelefone" type="xs:int"/>
+      <xs:element name="nrRamal" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrTelefone" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pais" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element ref="tipoTelefone" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ddd">
+    <xs:sequence>
+      <xs:element name="cdDdd" type="xs:int"/>
+      <xs:element ref="uf" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="uf">
+    <xs:sequence>
+      <xs:element name="cdUfIbge" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdUfRf" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmUf" type="xs:string" minOccurs="0"/>
+      <xs:element ref="regiao" minOccurs="0"/>
+      <xs:element name="sgUf" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="regiao">
+    <xs:sequence>
+      <xs:element name="cdRegiaoIbge" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmRegiao" type="xs:string" minOccurs="0"/>
+      <xs:element name="sgRegiao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pais">
+    <xs:sequence>
+      <xs:element name="cdDdi" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="sgPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="sgPaisIso" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoa">
+    <xs:sequence>
+      <xs:element name="contas" type="contaCorrente" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="dtRegistro" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="emails" type="email" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="enderecos" type="endereco" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="idPessoa" type="xs:int" minOccurs="0"/>
+      <xs:element ref="pais" minOccurs="0"/>
+      <xs:element name="pessoasMeVincularam" type="pessoaVinculada" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="pessoasVinculadas" type="pessoaVinculada" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="telefones" type="telefone" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="tipoAbrangencia" minOccurs="0"/>
+      <xs:element ref="tipoPessoa" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="contaCorrente">
+    <xs:sequence>
+      <xs:element ref="agencia" minOccurs="0"/>
+      <xs:element ref="banco" minOccurs="0"/>
+      <xs:element name="idContaCorrente" type="xs:int"/>
+      <xs:element name="nrContaCorrente" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element name="stContaCorrentePrincipal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="agencia">
+    <xs:sequence>
+      <xs:element ref="banco" minOccurs="0"/>
+      <xs:element name="idAgencia" type="xs:int"/>
+      <xs:element name="nmAgencia" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrAgencia" type="xs:string" minOccurs="0"/>
+      <xs:element name="SContaCorrentes" type="contaCorrente" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="banco">
+    <xs:sequence>
+      <xs:element name="nmBanco" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrBanco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="email">
+    <xs:sequence>
+      <xs:element name="dsEmail" type="xs:string" minOccurs="0"/>
+      <xs:element name="idEmail" type="xs:int"/>
+      <xs:element name="idPessoa" type="xs:int" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element name="stEmailPrincipal" type="xs:string" minOccurs="0"/>
+      <xs:element ref="tipoEmail" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoEmail">
+    <xs:sequence>
+      <xs:element name="dsTipoEmail" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoEmail" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="endereco">
+    <xs:sequence>
+      <xs:element ref="bairro" minOccurs="0"/>
+      <xs:element name="dsBairroEndereco" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsComplementoEndereco" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsLograEndereco" type="xs:string" minOccurs="0"/>
+      <xs:element name="idEndereco" type="xs:int"/>
+      <xs:element ref="logradouro" minOccurs="0"/>
+      <xs:element name="nrComplemento" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+      <xs:element ref="subdistritoIbge" minOccurs="0"/>
+      <xs:element ref="tipoEndereco" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bairro">
+    <xs:sequence>
+      <xs:element name="idBairro" type="xs:int"/>
+      <xs:element ref="municipio" minOccurs="0"/>
+      <xs:element name="nmBairro" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmBairroAbreviado" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpOrigem" type="xs:int" minOccurs="0"/>
+      <xs:element ref="uf" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="municipio">
+    <xs:sequence>
+      <xs:element name="cdDdd" type="xs:int" minOccurs="0"/>
+      <xs:element name="cdMicroregiao" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdMunicipioBacen" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdMunicipioCorreio" type="xs:int" minOccurs="0"/>
+      <xs:element name="cdMunicipioIbge" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdMunicipioRf" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdMunicipioSiape" type="xs:int" minOccurs="0"/>
+      <xs:element name="idMunicipio" type="xs:int"/>
+      <xs:element ref="microregiao" minOccurs="0"/>
+      <xs:element name="municipioPai" type="municipio" minOccurs="0"/>
+      <xs:element name="nmMunicipio" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pais" minOccurs="0"/>
+      <xs:element ref="situacaoMunicipio" minOccurs="0"/>
+      <xs:element name="stCapital" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpLocalidade" type="xs:string" minOccurs="0"/>
+      <xs:element ref="uf" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="microregiao">
+    <xs:sequence>
+      <xs:element name="cdMicroregiao" type="xs:string" minOccurs="0"/>
+      <xs:element name="idMicroregiao" type="xs:int"/>
+      <xs:element ref="mesoregiao" minOccurs="0"/>
+      <xs:element name="nmMicroregiao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="mesoregiao">
+    <xs:sequence>
+      <xs:element name="cdMesoregiao" type="xs:string" minOccurs="0"/>
+      <xs:element name="idMesoregiao" type="xs:int"/>
+      <xs:element name="nmMesoregiao" type="xs:string" minOccurs="0"/>
+      <xs:element ref="uf" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="situacaoMunicipio">
+    <xs:sequence>
+      <xs:element name="cdSituacaoMunicipio" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsSituacaoMunicipio" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="logradouro">
+    <xs:sequence>
+      <xs:element name="bairroFim" type="bairro" minOccurs="0"/>
+      <xs:element name="bairroInicio" type="bairro" minOccurs="0"/>
+      <xs:element name="dsComplemento" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoLogradouro" type="xs:string" minOccurs="0"/>
+      <xs:element name="idLogradouro" type="xs:int"/>
+      <xs:element ref="municipio" minOccurs="0"/>
+      <xs:element name="nmAbrevLogradouro" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmLogradouro" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCep" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCpc" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrSecaoFinal" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrSecaoInicial" type="xs:string" minOccurs="0"/>
+      <xs:element name="stAtualizacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="stLogradouro" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpCep" type="xs:int" minOccurs="0"/>
+      <xs:element name="tpParidade" type="xs:string" minOccurs="0"/>
+      <xs:element ref="uf" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servico">
+    <xs:sequence>
+      <xs:element name="dsLocalizacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsServico" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtValidadeServico" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="gestores" type="gestorServico" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="horariosExecucao" type="servicoHorarioExecucao" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="idServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="idTipoServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="linguagemSistema" type="linguagemSistema" minOccurs="0"/>
+      <xs:element name="mensagens" type="mensagem" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="nmAcao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmAlias" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmServico" type="xs:string" minOccurs="0"/>
+      <xs:element name="perfis" type="servicoPerfil" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="responsaveis" type="responsavelServico" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servicoAutenticacao" type="servicoAutenticacao" minOccurs="0"/>
+      <xs:element name="sgServico" type="xs:string" minOccurs="0"/>
+      <xs:element name="stServico" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipoServico" type="tipoServico" minOccurs="0"/>
+      <xs:element name="tiposDominio" type="tipoDominio" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tpVisibilidade" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="gestorServico">
+    <xs:sequence>
+      <xs:element name="idGestorServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="idServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidor">
+    <xs:sequence>
+      <xs:element name="carteirasFuncionais" type="carteiraFuncional" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="dsCarreiraServidor" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsClasse" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsMotivoExercicio" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsPadrao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtAdmissao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtAposentadoria" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtAtualizacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtExoneracao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtFimExercicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtInicioExercicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="ferias" type="feriasServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="funcoesServidores" type="funcaoServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="id" type="servidorPK" minOccurs="0"/>
+      <xs:element name="nmApelido" type="xs:string" minOccurs="0"/>
+      <xs:element name="ocorrenciasServidores" type="ocorrenciaServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="orgaoExternoOri" type="orgaoExterno" minOccurs="0"/>
+      <xs:element name="orgaoExternoReq" type="orgaoExterno" minOccurs="0"/>
+      <xs:element name="orgaoInternoExe" type="orgaoInterno" minOccurs="0"/>
+      <xs:element name="orgaoInternoLoc" type="orgaoInterno" minOccurs="0"/>
+      <xs:element name="orgaoInternoLot" type="orgaoInterno" minOccurs="0"/>
+      <xs:element name="orgaosInternosResponsavel" type="orgaoInterno" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element name="servicos" type="servico" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidorFoto" type="servidorFoto" minOccurs="0"/>
+      <xs:element name="stVinculoEmpregaticio" type="xs:string" minOccurs="0"/>
+      <xs:element name="tempoServico" type="tempoServicoServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tipoCarreira" type="tipoCarreira" minOccurs="0"/>
+      <xs:element name="tipoExpedienteTrabalho" type="tipoExpedienteTrabalho" minOccurs="0"/>
+      <xs:element name="tipoIngresso" type="tipoIngresso" minOccurs="0"/>
+      <xs:element name="tipoJornadaTrabalho" type="tipoJornadaTrabalho" minOccurs="0"/>
+      <xs:element name="tipoRegimeTrabalhista" type="tipoRegimeTrabalhista" minOccurs="0"/>
+      <xs:element name="tipoServidor" type="tipoServidor" minOccurs="0"/>
+      <xs:element name="tipoSituacao" type="tipoSituacao" minOccurs="0"/>
+      <xs:element name="tipoVinculo" type="tipoVinculo" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="carteiraFuncional">
+    <xs:sequence>
+      <xs:element name="dtEmissaoCarteiraFuncional" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idCarteiraFuncional" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrCarteiraFuncional" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrViaCarteiraFuncional" type="xs:int" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+      <xs:element name="tipoCarteiraFuncional" type="tipoCarteiraFuncional" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoCarteiraFuncional">
+    <xs:sequence>
+      <xs:element name="dsTipoCarteiraFuncional" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoCarteiraFuncional" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="feriasServidor">
+    <xs:sequence>
+      <xs:element name="dtFim" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtInterrupcao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="feriasServidorPK" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+      <xs:element name="stAbonoferias" type="xs:string" minOccurs="0"/>
+      <xs:element name="stAdiantamentoFerias" type="xs:string" minOccurs="0"/>
+      <xs:element name="stAlteracaoFerias" type="xs:string" minOccurs="0"/>
+      <xs:element name="stGratificacaoNatal" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpIndicador" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="feriasServidorPK">
+    <xs:sequence>
+      <xs:element name="aaPeriodoAquisitivo" type="xs:int"/>
+      <xs:element name="dtInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="funcaoServidor">
+    <xs:sequence>
+      <xs:element name="dsAtoDesignacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsAtoExoneracao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtSaida" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="funcaoOrgaoInterno" type="funcaoOrgaoInterno" minOccurs="0"/>
+      <xs:element name="id" type="funcaoServidorPK" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+      <xs:element name="tpOcupacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="vlPercentualRepresentacao" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="funcaoOrgaoInterno">
+    <xs:sequence>
+      <xs:element name="atividade" type="atividade" minOccurs="0"/>
+      <xs:element name="dsAnexoVencimento" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsAtoCriacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsAtoExtincaoTransformacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtCriacao" type="timestamp" minOccurs="0"/>
+      <xs:element name="dtExtincaoTransformacao" type="timestamp" minOccurs="0"/>
+      <xs:element name="funcaoServidores" type="funcaoServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="idFuncaoOrgao" type="xs:int" minOccurs="0"/>
+      <xs:element name="nivelFuncao" type="nivelFuncao" minOccurs="0"/>
+      <xs:element name="orgaoInterno" type="orgaoInterno" minOccurs="0"/>
+      <xs:element name="stOcupada" type="xs:string" minOccurs="0"/>
+      <xs:element name="stResponsavelOrgao" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpFuncao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="atividade">
+    <xs:sequence>
+      <xs:element name="cdAtividade" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsAtividade" type="xs:string" minOccurs="0"/>
+      <xs:element name="funcoesOrgaoInternos" type="funcaoOrgaoInterno" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="sgAtividade" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="timestamp">
+    <xs:sequence>
+      <xs:element name="nanos" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="nivelFuncao">
+    <xs:sequence>
+      <xs:element name="cdNivelFuncao" type="xs:int"/>
+      <xs:element name="funcao" type="funcao" minOccurs="0"/>
+      <xs:element name="funcoesOrgaoInternos" type="funcaoOrgaoInterno" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="nivel" type="nivel" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="funcao">
+    <xs:sequence>
+      <xs:element name="dsAtoCriacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="niveisFuncoes" type="nivelFuncao" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="nmFuncao" type="xs:string" minOccurs="0"/>
+      <xs:element name="sgFuncao" type="xs:string" minOccurs="0"/>
+      <xs:element name="stSuperior" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="nivel">
+    <xs:sequence>
+      <xs:element name="dsNivel" type="xs:string" minOccurs="0"/>
+      <xs:element name="idNivel" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orgaoInterno">
+    <xs:sequence>
+      <xs:element name="cdOrgaoSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsCompetencia" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtAtoCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtAtoExtincao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtExtincao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="enderecos" type="orgaoEndereco" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="funcoesOrgaoInternos" type="funcaoOrgaoInterno" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="idOrgaoInterno" type="xs:int" minOccurs="0"/>
+      <xs:element name="idPessoaJuridica" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmOrgao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmOrgaoExtenso" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrAtoCriacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrAtoExtincao" type="xs:string" minOccurs="0"/>
+      <xs:element name="orgaoInterno" type="orgaoInterno" minOccurs="0"/>
+      <xs:element name="orgaoInternoSubordinados" type="orgaoInterno" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+      <xs:element name="servidoresExe" type="servidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidoresLoc" type="servidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidoresLot" type="servidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="sgOrgao" type="xs:string" minOccurs="0"/>
+      <xs:element name="sgOrgaoSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpAtoCriacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpAtoExtincao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orgaoEndereco">
+    <xs:sequence>
+      <xs:element name="id" type="orgaoEnderecoPK" minOccurs="0"/>
+      <xs:element name="orgaoInterno" type="orgaoInterno" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orgaoEnderecoPK">
+    <xs:sequence>
+      <xs:element name="idEndereco" type="xs:int" minOccurs="0"/>
+      <xs:element name="idOrgaoInterno" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="funcaoServidorPK">
+    <xs:sequence>
+      <xs:element name="dtIngresso" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidorPK">
+    <xs:sequence>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ocorrenciaServidor">
+    <xs:sequence>
+      <xs:element name="diplomaLegal" type="diplomaLegal" minOccurs="0"/>
+      <xs:element name="dsObservacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtFim" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="ocorrenciaServidorPK" minOccurs="0"/>
+      <xs:element name="ocorrencia" type="ocorrencia" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+      <xs:element name="tpOcorrenciaServidor" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="diplomaLegal">
+    <xs:sequence>
+      <xs:element name="cdDiplomaLegalSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="idDiplomaLegal" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmDiplomaLegal" type="xs:string" minOccurs="0"/>
+      <xs:element name="ocorrenciasServidores" type="ocorrenciaServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="sgDiplomaLegal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ocorrenciaServidorPK">
+    <xs:sequence>
+      <xs:element name="dtInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idOcorrencia" type="xs:int" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ocorrencia">
+    <xs:sequence>
+      <xs:element name="dsOcorrencia" type="xs:string" minOccurs="0"/>
+      <xs:element name="idOcorrencia" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrConceitoProgressao" type="xs:int" minOccurs="0"/>
+      <xs:element name="ocorrenciaSiape" type="ocorrenciaSiape" minOccurs="0"/>
+      <xs:element name="ocorrenciasServidores" type="ocorrenciaServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="stAnuenio" type="xs:string" minOccurs="0"/>
+      <xs:element name="stAposentadoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="stAutomatica" type="xs:string" minOccurs="0"/>
+      <xs:element name="stEfetivo" type="xs:string" minOccurs="0"/>
+      <xs:element name="stInterrupcao" type="xs:string" minOccurs="0"/>
+      <xs:element name="stLicencaMedica" type="xs:string" minOccurs="0"/>
+      <xs:element name="stPublicaBoletim" type="xs:string" minOccurs="0"/>
+      <xs:element name="stSeams" type="xs:string" minOccurs="0"/>
+      <xs:element name="stVaga" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpLicencaPremio" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ocorrenciaSiape">
+    <xs:sequence>
+      <xs:element name="cdTipoOcorrenciaSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoOcorrenciaSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="ocorrencias" type="ocorrencia" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orgaoExterno">
+    <xs:sequence>
+      <xs:element name="cdOrgaoSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsCompetencia" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtAtoCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtAtoExtincao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtExtincao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idOrgaoExterno" type="xs:int" minOccurs="0"/>
+      <xs:element name="idPessoaJuridica" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmOrgao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmOrgaoExtenso" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrAtoCriacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrAtoExtincao" type="xs:string" minOccurs="0"/>
+      <xs:element name="orgaoExterno" type="orgaoExterno" minOccurs="0"/>
+      <xs:element name="orgaoExternoSubordinados" type="orgaoExterno" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidoresCedidos" type="servidorCedido" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidoresOri" type="servidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidoresReq" type="servidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="servidoresRequisitados" type="servidorRequisitado" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="sgOrgao" type="xs:string" minOccurs="0"/>
+      <xs:element name="tempoServicoServidores" type="tempoServicoServidor" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tpAtoCriacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpAtoExtincao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidorCedido">
+    <xs:sequence>
+      <xs:element name="dsAtoCessao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsAtoFimCessao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsResponsavelOnus" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtFimCessao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="servidorCedidoPK" minOccurs="0"/>
+      <xs:element name="orgaoExterno" type="orgaoExterno" minOccurs="0"/>
+      <xs:element name="poder" type="poder" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidorCedidoPK">
+    <xs:sequence>
+      <xs:element name="dtInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="poder">
+    <xs:sequence>
+      <xs:element name="dsPoder" type="xs:string" minOccurs="0"/>
+      <xs:element name="idPoder" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidorRequisitado">
+    <xs:sequence>
+      <xs:element name="dsAtoRequisicao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsResponsavelOnus" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtFim" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="servidorRequisitadoPK" minOccurs="0"/>
+      <xs:element name="orgaoExterno" type="orgaoExterno" minOccurs="0"/>
+      <xs:element name="poder" type="poder" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidorRequisitadoPK">
+    <xs:sequence>
+      <xs:element name="dtInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idOrgaoExternoOrigem" type="xs:int" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tempoServicoServidor">
+    <xs:sequence>
+      <xs:element name="dtFim" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="tempoServicoServidorPK" minOccurs="0"/>
+      <xs:element name="orgaoExterno" type="orgaoExterno" minOccurs="0"/>
+      <xs:element name="qtAnuenio" type="xs:int" minOccurs="0"/>
+      <xs:element name="qtLicencaPremio" type="xs:int" minOccurs="0"/>
+      <xs:element name="qtTempoLiquido" type="xs:int" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+      <xs:element name="tipoTempoServico" type="tipoTempoServico" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tempoServicoServidorPK">
+    <xs:sequence>
+      <xs:element name="dtInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idServidor" type="xs:int" minOccurs="0"/>
+      <xs:element name="idTipoTempoServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMatriculaSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoTempoServico">
+    <xs:sequence>
+      <xs:element name="dsTipoTempoServico" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoTempoServico" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaFisica">
+    <xs:sequence>
+      <xs:element ref="caracteristicaFisica" minOccurs="0"/>
+      <xs:element name="cbos" type="pessoaFisicaJuridicaCbo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="documentacao" type="documentacaoPessoa" minOccurs="0"/>
+      <xs:element name="dsTipoSanguineo" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtNascimento" type="xs:dateTime" minOccurs="0"/>
+      <xs:element ref="escolaridade" minOccurs="0"/>
+      <xs:element ref="estadoCivil" minOccurs="0"/>
+      <xs:element name="formacoes" type="pessoaCursoFormacao" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="historicoSituacaoCadastral" type="situacaoCadastralPF" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="idPessoaFisica" type="xs:int" minOccurs="0"/>
+      <xs:element name="idiomas" type="idiomaPessoa" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="municipio" minOccurs="0"/>
+      <xs:element name="nmMae" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmPai" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmPessoaFisica" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCpf" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element name="sgSexo" type="xs:string" minOccurs="0"/>
+      <xs:element name="situacaoCadastral" type="situacaoCadastralPF" minOccurs="0"/>
+      <xs:element name="stDoador" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpResidenteExterior" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpSituacaoCadastral" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="caracteristicaFisica">
+    <xs:sequence>
+      <xs:element ref="cor" minOccurs="0"/>
+      <xs:element name="idPessoaFisica" type="xs:int"/>
+      <xs:element ref="pais" minOccurs="0"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cor">
+    <xs:sequence>
+      <xs:element name="dsCor" type="xs:string" minOccurs="0"/>
+      <xs:element name="idCor" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaFisicaJuridicaCbo">
+    <xs:sequence>
+      <xs:element ref="cbo" minOccurs="0"/>
+      <xs:element name="idPessoaFisicaCbo" type="xs:int"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element ref="pessoaJuridica" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cbo">
+    <xs:sequence>
+      <xs:element name="cboPai" type="cbo" minOccurs="0"/>
+      <xs:element name="cdCbo" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdCbo94" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmCbo" type="xs:string" minOccurs="0"/>
+      <xs:element name="tpCbo" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaJuridica">
+    <xs:sequence>
+      <xs:element name="cbos" type="pessoaFisicaJuridicaCbo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="cnaes" type="pessoaJuridicaCnae" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="historicoSituacaoCadastral" type="situacaoCadastralPJ" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="idPessoaJuridica" type="xs:int"/>
+      <xs:element name="idTipoLucro" type="xs:int" minOccurs="0"/>
+      <xs:element ref="naturezaJuridica" minOccurs="0"/>
+      <xs:element name="nmFantasia" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmRazaoSocial" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCei" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCnpj" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrInscricaoEstadual" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element name="tiposLucro" type="tipoLucro" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaJuridicaCnae">
+    <xs:sequence>
+      <xs:element ref="cnae" minOccurs="0"/>
+      <xs:element name="idPessoaJuridicaCnae" type="xs:int"/>
+      <xs:element ref="pessoaJuridica" minOccurs="0"/>
+      <xs:element name="stCnae" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cnae">
+    <xs:sequence>
+      <xs:element name="cdCnae" type="xs:string" minOccurs="0"/>
+      <xs:element name="cnaePai" type="cnae" minOccurs="0"/>
+      <xs:element name="dsCnae" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsNivelHierarquia" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsNotaExplicativa" type="xs:string" minOccurs="0"/>
+      <xs:element name="idCnae" type="xs:int"/>
+      <xs:element name="nrNivelHierarquia" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="situacaoCadastralPJ">
+    <xs:sequence>
+      <xs:element name="dsHash" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtSituacaoCadastral" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idPessoaJuridica" type="xs:int"/>
+      <xs:element name="idSituacaoCadastalPJ" type="xs:int"/>
+      <xs:element ref="pessoaJuridica" minOccurs="0"/>
+      <xs:element name="tipoSituacaoCadastral" type="tipoSituacaoCadastralPJ" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoSituacaoCadastralPJ">
+    <xs:sequence>
+      <xs:element name="cdSituacaoCadastral" type="xs:int"/>
+      <xs:element name="dsSituacaoCadastral" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="naturezaJuridica">
+    <xs:sequence>
+      <xs:element name="cdNaturezaJuridica" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsNaturezaJuridica" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoLucro">
+    <xs:sequence>
+      <xs:element name="dsTipoLucro" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoLucro" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="documentacaoPessoa">
+    <xs:sequence>
+      <xs:element name="cbos" type="pessoaFisicaJuridicaCbo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="cdCategoriaReservista" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsCategoriaHabilitacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsRegiaoReservista" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtExpCertificadoReservista" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtExpTituloEleitor" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtExpedicaoRg" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idPessoaFisica" type="xs:int"/>
+      <xs:element name="nmExpCertificadoReservista" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmExpConselhoClasse" type="xs:string" minOccurs="0"/>
+      <xs:element name="nmOrgaoExpRg" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCarteiraConselhoClasse" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCarteiraTrabalho" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCertificadoReservista" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrHabilitacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrPisPasep" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrRg" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrSecaoTituloEleitor" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrSerieCarteiraTrabalho" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrTituloEleitor" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrZonaTituloEleitor" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element name="ufCarteiraTrabalho" type="uf" minOccurs="0"/>
+      <xs:element name="ufConselhoClasse" type="uf" minOccurs="0"/>
+      <xs:element name="ufIdentidade" type="uf" minOccurs="0"/>
+      <xs:element name="ufTituloEleitoral" type="uf" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="escolaridade">
+    <xs:sequence>
+      <xs:element name="cdEscolaridade" type="xs:int"/>
+      <xs:element name="dsEscolaridade" type="xs:string" minOccurs="0"/>
+      <xs:element ref="nivelEscolaridade" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="nivelEscolaridade">
+    <xs:sequence>
+      <xs:element name="dsNivelEscolaridade" type="xs:string" minOccurs="0"/>
+      <xs:element name="idNivelEscolaridade" type="xs:string" minOccurs="0"/>
+      <xs:element name="sgEscolaridadeSiape" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="estadoCivil">
+    <xs:sequence>
+      <xs:element name="cdEstadoCivil" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsEstadoCivil" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaCursoFormacao">
+    <xs:sequence>
+      <xs:element name="aaFimCurso" type="xs:int" minOccurs="0"/>
+      <xs:element name="aaInicioCurso" type="xs:int" minOccurs="0"/>
+      <xs:element ref="cursoFormacao" minOccurs="0"/>
+      <xs:element name="dsTituloAcademico" type="xs:string" minOccurs="0"/>
+      <xs:element name="idPessoaCursoFormacao" type="xs:int"/>
+      <xs:element ref="municipio" minOccurs="0"/>
+      <xs:element name="nmInstituicaoEnsino" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrCargaHoraria" type="xs:int" minOccurs="0"/>
+      <xs:element ref="pais" minOccurs="0"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cursoFormacao">
+    <xs:sequence>
+      <xs:element ref="curso" minOccurs="0"/>
+      <xs:element ref="cursoArea" minOccurs="0"/>
+      <xs:element ref="cursoNivelFormacao" minOccurs="0"/>
+      <xs:element name="idCursoFormacao" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="curso">
+    <xs:sequence>
+      <xs:element name="idCurso" type="xs:int"/>
+      <xs:element name="nmCurso" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cursoArea">
+    <xs:sequence>
+      <xs:element name="dsCursoArea" type="xs:string" minOccurs="0"/>
+      <xs:element name="idCursoArea" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cursoNivelFormacao">
+    <xs:sequence>
+      <xs:element name="dsCursoNivelFormacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="idCursoNivelFormacao" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="situacaoCadastralPF">
+    <xs:sequence>
+      <xs:element name="dsHash" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtSituacaoCadastral" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idPessoaFisica" type="xs:int"/>
+      <xs:element name="idSituacaoCadastalPF" type="xs:int"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element name="tipoSituacaoCadastral" type="tipoSituacaoCadastralPF" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoSituacaoCadastralPF">
+    <xs:sequence>
+      <xs:element name="cdSituacaoCadastral" type="xs:int"/>
+      <xs:element name="dsSituacaoCadastral" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="idiomaPessoa">
+    <xs:sequence>
+      <xs:element name="idIdiomaPessoa" type="xs:int"/>
+      <xs:element ref="idioma" minOccurs="0"/>
+      <xs:element name="nmEstabelecimentoEnsino" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element name="stDominioPortugues" type="xs:string" minOccurs="0"/>
+      <xs:element name="stEntende" type="xs:string" minOccurs="0"/>
+      <xs:element name="stEscreve" type="xs:string" minOccurs="0"/>
+      <xs:element name="stFala" type="xs:string" minOccurs="0"/>
+      <xs:element name="stLe" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="idioma">
+    <xs:sequence>
+      <xs:element name="dsIdioma" type="xs:string" minOccurs="0"/>
+      <xs:element name="idIdioma" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servidorFoto">
+    <xs:sequence>
+      <xs:element name="id" type="servidorPK" minOccurs="0"/>
+      <xs:element name="nmArquivoFoto" type="xs:string" minOccurs="0"/>
+      <xs:element name="servidor" type="servidor" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoCarreira">
+    <xs:sequence>
+      <xs:element name="dsTipoCarreira" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoCarreira" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoExpedienteTrabalho">
+    <xs:sequence>
+      <xs:element name="dsTipoExpedienteTrabalho" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoExpedienteTrabalho" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoIngresso">
+    <xs:sequence>
+      <xs:element name="cdGrupoIngrOrgaoSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="cdOcorrIngrOrgaoSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoIngresso" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoIngresso" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoJornadaTrabalho">
+    <xs:sequence>
+      <xs:element name="dsTipoJornadaTrabalho" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoJornadaTrabalho" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoRegimeTrabalhista">
+    <xs:sequence>
+      <xs:element name="dsTipoRegimeTrabalhista" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoRegimeTrabalhista" type="xs:int" minOccurs="0"/>
+      <xs:element name="sgTipoRegimeTrabalhista" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoServidor">
+    <xs:sequence>
+      <xs:element name="dsTipoServidor" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoServidor" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoSituacao">
+    <xs:sequence>
+      <xs:element name="cdTipoSituacaoSiape" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoSituacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoSituacao" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoVinculo">
+    <xs:sequence>
+      <xs:element name="dsTipoVinculo" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoVinculo" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servicoHorarioExecucao">
+    <xs:sequence>
+      <xs:element name="hrFim" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="hrInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrAno" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrDia" type="xs:int" minOccurs="0"/>
+      <xs:element name="nrMes" type="xs:int" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="linguagemSistema">
+    <xs:sequence>
+      <xs:element name="idLinguagemSistema" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmLinguagemSistema" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="mensagem">
+    <xs:sequence>
+      <xs:element name="cdMensagem" type="xs:int" minOccurs="0"/>
+      <xs:element name="dsMensagem" type="xs:string" minOccurs="0"/>
+      <xs:element name="idMensagem" type="xs:int" minOccurs="0"/>
+      <xs:element name="idServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmMensagem" type="xs:string" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+      <xs:element name="tpMensagem" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servicoPerfil">
+    <xs:sequence>
+      <xs:element name="dtCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="servicoPerfilPK" minOccurs="0"/>
+      <xs:element name="perfil" type="perfil" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+      <xs:element name="stPerfil" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servicoPerfilPK">
+    <xs:sequence>
+      <xs:element name="idPerfil" type="xs:int"/>
+      <xs:element name="idServico" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="perfil">
+    <xs:sequence>
+      <xs:element name="dtValidadePerfil" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idPerfil" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmPerfil" type="xs:string" minOccurs="0"/>
+      <xs:element name="servicos" type="servico" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="stPerfil" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="responsavelServico">
+    <xs:sequence>
+      <xs:element name="id" type="responsavelServicoPK" minOccurs="0"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element ref="pessoaJuridica" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="responsavelServicoPK">
+    <xs:sequence>
+      <xs:element name="idPessoaFisica" type="xs:int" minOccurs="0"/>
+      <xs:element name="idPessoaJuridica" type="xs:int" minOccurs="0"/>
+      <xs:element name="idServico" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="servicoAutenticacao">
+    <xs:sequence>
+      <xs:element name="dsChave" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsIpAcesso" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsSenha" type="xs:string" minOccurs="0"/>
+      <xs:element name="dtCriacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="idServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="servico" type="servico" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoServico">
+    <xs:sequence>
+      <xs:element name="idTipoServico" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmTipoServico" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoDominio">
+    <xs:sequence>
+      <xs:element name="idTipoDominio" type="xs:int" minOccurs="0"/>
+      <xs:element name="nmTipoDominio" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subdistritoIbge">
+    <xs:sequence>
+      <xs:element name="cdSubdistritoIbge" type="xs:string" minOccurs="0"/>
+      <xs:element ref="distritoIbge" minOccurs="0"/>
+      <xs:element name="idSubdistritoIbge" type="xs:int"/>
+      <xs:element name="nmSubdistritoIbge" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="distritoIbge">
+    <xs:sequence>
+      <xs:element name="cdDistritoIbge" type="xs:string" minOccurs="0"/>
+      <xs:element name="idDistritoIbge" type="xs:int"/>
+      <xs:element ref="municipio" minOccurs="0"/>
+      <xs:element name="nmDistritoIbge" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoEndereco">
+    <xs:sequence>
+      <xs:element name="cdTipoEndereco" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoEndereco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaVinculada">
+    <xs:sequence>
+      <xs:element name="dtFim" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dtInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="pessoaVinculadaPK" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element ref="pessoaEstrangeira" minOccurs="0"/>
+      <xs:element ref="pessoaFisica" minOccurs="0"/>
+      <xs:element ref="pessoaJuridica" minOccurs="0"/>
+      <xs:element name="pessoaVinculada" type="pessoa" minOccurs="0"/>
+      <xs:element name="stPessoaVinculada" type="xs:string" minOccurs="0"/>
+      <xs:element ref="tipoVinculoPessoa" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaVinculadaPK">
+    <xs:sequence>
+      <xs:element name="idPessoa" type="xs:int"/>
+      <xs:element name="idPessoaVinculada" type="xs:int"/>
+      <xs:element name="idTipoVinculoPessoa" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pessoaEstrangeira">
+    <xs:sequence>
+      <xs:element name="dsEmail" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsEndereco" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTelefone" type="xs:string" minOccurs="0"/>
+      <xs:element name="idPessoaEstrangeira" type="xs:int"/>
+      <xs:element name="nmPessoaEstrangeira" type="xs:string" minOccurs="0"/>
+      <xs:element name="nrIdentificacao" type="xs:string" minOccurs="0"/>
+      <xs:element ref="pessoa" minOccurs="0"/>
+      <xs:element name="tpIdentificacao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoVinculoPessoa">
+    <xs:sequence>
+      <xs:element name="dsTipoVinculoPessoa" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoVinculoPessoa" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoAbrangencia">
+    <xs:sequence>
+      <xs:element name="cdTipoAbrangencia" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoAbrangencia" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoPessoa">
+    <xs:sequence>
+      <xs:element name="cdTipoPessoa" type="xs:string" minOccurs="0"/>
+      <xs:element name="dsTipoPessoa" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipoTelefone">
+    <xs:sequence>
+      <xs:element name="dsTipoTelefone" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoTelefone" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
