@@ -23,4 +23,4 @@ _**OBS**_: _Aplicação validada e operacional com Jboss-7.1.1_ e operando no ip
         
 ### Build
 
-O ambiente que for efetuar o build deve estar dotado da **openjdk-1.7.80u** ou anterior 
+O ambiente que for efetuar o build deve estar dotado da **openjdk-1.7.65** ou anterior 
