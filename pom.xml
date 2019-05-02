@@ -3,10 +3,10 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.gov.cultura.sistema.pessoa</groupId>
-	<artifactId>pessoa-ws</artifactId>
+	<artifactId>minc-pessoa</artifactId>
 	<version>1.1.8</version>
 	<packaging>war</packaging>
-	<name>pessoa-ws</name>
+	<name>minc-pessoa</name>
 	<description>Web Services que gerenciam a base corporativa do Minitério da Cultura</description>
 	<url>http://www.cultura.gov.br/</url>
 
