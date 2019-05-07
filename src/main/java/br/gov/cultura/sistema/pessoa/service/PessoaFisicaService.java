@@ -1,23 +1,7 @@
 package br.gov.cultura.sistema.pessoa.service;
 
-import br.gov.cultura.sistema.model.corporativo.Ddd;
-import br.gov.cultura.sistema.model.corporativo.DocumentacaoPessoa;
-import br.gov.cultura.sistema.model.corporativo.Endereco;
-import br.gov.cultura.sistema.model.corporativo.Pais;
-import br.gov.cultura.sistema.model.corporativo.Pessoa;
-import br.gov.cultura.sistema.model.corporativo.PessoaFisica;
-import br.gov.cultura.sistema.model.corporativo.SituacaoCadastralPF;
-import br.gov.cultura.sistema.model.corporativo.Telefone;
-import br.gov.cultura.sistema.model.corporativo.TipoAbrangencia;
-import br.gov.cultura.sistema.model.corporativo.TipoEndereco;
-import br.gov.cultura.sistema.model.corporativo.TipoPessoa;
-import br.gov.cultura.sistema.model.corporativo.TipoSituacaoCadastralPF;
-import br.gov.cultura.sistema.model.corporativo.TipoTelefone;
-import br.gov.cultura.sistema.model.enums.corporativo.PaisEnum;
-import br.gov.cultura.sistema.model.enums.corporativo.TipoAbrangenciaEnum;
-import br.gov.cultura.sistema.model.enums.corporativo.TipoEnderecoEnum;
-import br.gov.cultura.sistema.model.enums.corporativo.TipoPessoaEnum;
-import br.gov.cultura.sistema.model.enums.corporativo.TipoTelefoneEnum;
+import br.gov.cultura.sistema.model.corporativo.*;
+import br.gov.cultura.sistema.model.enums.corporativo.*;
 import br.gov.cultura.sistema.model.seguranca.Servico;
 import br.gov.cultura.sistema.pessoa.PessoaUtils;
 import br.gov.cultura.sistema.pessoa.exception.NegocioException;
@@ -28,14 +12,7 @@ import br.gov.fazenda.receita.infoconv.ws.cpf.ConsultarCPFSoap;
 import br.gov.fazenda.receita.infoconv.ws.cpf.ConsultarCPFSoapProxy;
 import br.gov.fazenda.receita.infoconv.ws.cpf.PessoaPerfil3;
 import br.gov.fazenda.receita.infoconv.ws.util.CertificateUtil;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
@@ -44,6 +21,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
 
 @Stateless
 public class PessoaFisicaService {

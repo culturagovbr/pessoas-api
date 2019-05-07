@@ -4,6 +4,8 @@
 
 O serviço abrange a algumas informações da base do Ministerio da Cultura mais detalhadas.
 
+  - Obrigatório certificado para conecção de consulta conforme [documentação](https://github.com/infoconv/docs/wiki)
+  
 ## Instalando a Biblioteca 
 ##### **br.gov.cultura.sistema**
 
@@ -24,3 +26,21 @@ _**OBS**_: _Aplicação validada e operacional com Jboss-7.1.1_ e operando no ip
 ### Build
 
 O ambiente que for efetuar o build deve estar dotado da **openjdk-1.7.65** ou anterior 
+
+### Propriedades de Configuração
+
+Criar arquivo "minc-pessoa.properties" com as informações na pasta /opt/config
+
+        # Key Store
+        keyStoreType=pkcs12
+        keyStore=/opt/config/cert/[Arquivo.pfx](https://github.com/infoconv/docs/wiki)
+        keyStorePassword=password configurado
+        # Trust Store
+        trustStoreType=jks
+        trustStore= ${JAVA_HOME}/jre/lib/security/cacerts
+        trustStorePassword=Password configurado
+        # CPF Certificado
+        #João Bilas
+        cpf=01201201271
+
+Os certificados .pfx devem ficar na pasta /opt/config/cert
