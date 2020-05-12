@@ -1,5 +1,34 @@
 package br.gov.cultura.sistema.pessoa.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.Query;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import br.gov.cidadania.hadoop.cnpj.CnaeSecundarioHadoop;
+import br.gov.cidadania.hadoop.cnpj.CnaeSecundarioHadoopDTODeserializer;
+import br.gov.cidadania.hadoop.cnpj.EmpresaHadoop;
+import br.gov.cidadania.hadoop.cnpj.EmpresaHadoopDTODeserializer;
+import br.gov.cidadania.hadoop.cnpj.EstabelecimentoHadoop;
+import br.gov.cidadania.hadoop.cnpj.EstabelecimentoHadoopDTODeserializer;
 import br.gov.cultura.sistema.model.corporativo.Ddd;
 import br.gov.cultura.sistema.model.corporativo.Email;
 import br.gov.cultura.sistema.model.corporativo.Endereco;
@@ -28,23 +57,15 @@ import br.gov.cultura.sistema.pessoa.PessoaUtils;
 import br.gov.cultura.sistema.pessoa.exception.NegocioException;
 import br.gov.cultura.sistema.service.GenericCrudService;
 import br.gov.cultura.sistema.util.ValidacaoUtils;
-import br.gov.fazenda.receita.infoconv.ws.cnpj.CNPJPerfil3;
-import br.gov.fazenda.receita.infoconv.ws.cnpj.ConsultarCNPJSoap;
-import br.gov.fazenda.receita.infoconv.ws.cnpj.ConsultarCNPJSoapProxy;
-import br.gov.fazenda.receita.infoconv.ws.util.CertificateUtil;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.Query;
 
 @Stateless
 public class PessoaJuridicaService {
-    @Inject
+
+	private static final String REST_EMPRESA = "http://tdhdp01en01.mds.net:8099/p_hbase.tb_empresa/";
+	private static final String REST_CNAE_SECUNDARIO = "http://tdhdp01en01.mds.net:8099/p_hbase.tb_cnae_secundaria/";
+	private static final String REST_ESTABELECIMENTO = "http://tdhdp01en01.mds.net:8099/p_hbase.tb_estabelecimento/";
+	
+	@Inject
     private GenericCrudService genericCrudService;
     @Inject
     private EnderecoService enderecoService;
@@ -85,12 +106,14 @@ public class PessoaJuridicaService {
         List<PessoaJuridica> list = this.genericCrudService.findWithNamedQuery("PessoaJuridica.findByCnpj", paramMap);
         PessoaJuridica pessoa = list.isEmpty() ? null : (PessoaJuridica)list.get(0);
         if (pessoa == null) {
-            pessoa = this.getPessoaJuridicaWebServiceReceita(nrCnpj, (PessoaJuridica)null);
+            pessoa = this.getPessoaJuridicaHadoop(nrCnpj, (PessoaJuridica)null);
         } else if (forcarBuscaNaReceita) {
-            pessoa = this.getPessoaJuridicaWebServiceReceita(nrCnpj, pessoa);
+            pessoa = this.getPessoaJuridicaHadoop(nrCnpj, pessoa);
         }
-
-        if (pessoa != null) {
+        
+        if (pessoa == null) {
+        	throw new NegocioException(PessoaUtils.getMsgPessoaJuridicaNaoEncontradada());
+        } else {
             this.genericCrudService.refresh(pessoa);
             pessoa.getPessoa().setEnderecos(this.enderecoService.getEnderecos(pessoa.getPessoa(), servico));
         }
@@ -98,31 +121,57 @@ public class PessoaJuridicaService {
         return pessoa;
     }
 
-    private PessoaJuridica getPessoaJuridicaWebServiceReceita(String cnpj, PessoaJuridica pessoaJuridicaBaseLocal) throws NegocioException {
-        PessoaJuridica pessoaJuridica = null;
-
+    private PessoaJuridica getPessoaJuridicaHadoop(String cnpj, PessoaJuridica pessoaJuridicaBaseLocal) throws NegocioException {
+        
+    	PessoaJuridica pessoaJuridica = null;
+    	String message = null;
+    	
         try {
-            PessoaUtils.setSSLContextConfiguradoComCertificado();
-            ConsultarCNPJSoap consultarCNPJSoap = new ConsultarCNPJSoapProxy();
-            CNPJPerfil3[] pessoaReceita = null;
-            if (PessoaUtils.getEstagioProjeto().equalsIgnoreCase("producao")) {
-                pessoaReceita = consultarCNPJSoap.consultarCNPJP3(cnpj, CertificateUtil.CPF_CONVENIO_SERPRO);
-            } else {
-                pessoaReceita = consultarCNPJSoap.consultarCNPJP3T(cnpj, CertificateUtil.CPF_CONVENIO_SERPRO);
-            }
-
-            if (pessoaReceita.length > 0) {
-                pessoaJuridica = this.converterPessoaJuridica(pessoaReceita[0], pessoaJuridicaBaseLocal);
-                this.cadastrarPessoaJuridica(pessoaJuridica, pessoaJuridicaBaseLocal == null, Integer.parseInt(pessoaReceita[0].getSituacaoCadastral()));
-            }
-        } catch (NegocioException var6) {
-            throw var6;
+        	
+        	StringBuffer bufferEmpresa = requisicao(REST_EMPRESA, cnpj);
+			
+			final Gson gsonEmpresa = new GsonBuilder().registerTypeAdapter(EmpresaHadoop.class, new EmpresaHadoopDTODeserializer()).create();
+			EmpresaHadoop empresaHadoop = gsonEmpresa.fromJson(bufferEmpresa.toString(), EmpresaHadoop.class);
+			
+			StringBuffer bufferEstabelecimento = requisicao(REST_ESTABELECIMENTO, cnpj);
+			
+			final Gson gsonEstabelecimento = new GsonBuilder().registerTypeAdapter(EstabelecimentoHadoop.class, new EstabelecimentoHadoopDTODeserializer()).create();
+			EstabelecimentoHadoop estabelecimentoHadoop = gsonEstabelecimento.fromJson(bufferEstabelecimento.toString(), EstabelecimentoHadoop.class);
+			
+			StringBuffer bufferCnaeSecundario = requisicao(REST_CNAE_SECUNDARIO, cnpj);
+			
+			final Gson gsonCnaeSecundario = new GsonBuilder().registerTypeAdapter(CnaeSecundarioHadoop.class, new CnaeSecundarioHadoopDTODeserializer()).create();
+			CnaeSecundarioHadoop cnaeSecundarioHadoop = gsonCnaeSecundario.fromJson(bufferCnaeSecundario.toString(), CnaeSecundarioHadoop.class);
+			
+			if(empresaHadoop != null) {
+				pessoaJuridica = this.converterPessoaJuridica(empresaHadoop, estabelecimentoHadoop, cnaeSecundarioHadoop, pessoaJuridicaBaseLocal);
+				this.cadastrarPessoaJuridica(pessoaJuridica, pessoaJuridicaBaseLocal == null, Integer.parseInt(estabelecimentoHadoop.getSituacaoCadastral()));
+			} 
+			
+        } catch (NegocioException e) {            
+            throw new NegocioException(e.getMessage());
         } catch (Exception var7) {
             System.err.println("Erro ao tentar buscar informações na Receita Federal da empresa de cnpj: " + cnpj);
         }
 
         return pessoaJuridica;
     }
+
+	private StringBuffer requisicao(String url, String cnpj) throws IOException, ClientProtocolException {
+		HttpClient client = new DefaultHttpClient();
+		HttpGet request = new HttpGet(url + cnpj);
+		request.addHeader("Accept", "application/json");
+		HttpResponse response = client.execute(request);
+		
+		final BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		String inputLine;
+		StringBuffer buffer = new StringBuffer();
+		while ((inputLine = in.readLine()) != null) {
+			buffer.append(inputLine);
+		}
+		in.close();
+		return buffer;
+	}
 
     private void cadastrarPessoaJuridica(PessoaJuridica pessoaJuridica, boolean isCadastro, int codSituacaoCadastral) throws NegocioException {
         try {
@@ -208,7 +257,9 @@ public class PessoaJuridicaService {
         }
     }
 
-    private PessoaJuridica converterPessoaJuridica(CNPJPerfil3 pessoaReceita, PessoaJuridica pessoaJuridicaBaseLocal) throws NegocioException {
+    private PessoaJuridica converterPessoaJuridica(EmpresaHadoop empresaHadoop, EstabelecimentoHadoop estabelecimentoHadoop, 
+    		CnaeSecundarioHadoop cnaeSecundarioHadoop, PessoaJuridica pessoaJuridicaBaseLocal) throws NegocioException {
+    	
         try {
             Pessoa pessoa = null;
             if (pessoaJuridicaBaseLocal != null) {
@@ -228,11 +279,11 @@ public class PessoaJuridicaService {
                 pj = new PessoaJuridica();
                 pj.setPessoa(pessoa);
             }
-
-            pj.setNrCnpj(pessoaReceita.getCNPJ());
-            pj.setNmFantasia(pessoaReceita.getNomeFantasia());
-            pj.setNmRazaoSocial(pessoaReceita.getNomeEmpresarial());
-            NaturezaJuridica naturezaJuridica = (NaturezaJuridica)this.genericCrudService.find(NaturezaJuridica.class, pessoaReceita.getNaturezaJuridica());
+            
+            pj.setNrCnpj(empresaHadoop.getCnpj());
+            pj.setNmFantasia(estabelecimentoHadoop.getNomeFantasia());
+            pj.setNmRazaoSocial(empresaHadoop.getNomeEmpresarial());
+            NaturezaJuridica naturezaJuridica = (NaturezaJuridica)this.genericCrudService.find(NaturezaJuridica.class, empresaHadoop.getCodigoNaturezaJuridica());
             if (naturezaJuridica != null) {
                 pj.setNaturezaJuridica(naturezaJuridica);
             }
@@ -242,12 +293,12 @@ public class PessoaJuridicaService {
             }
 
             Telefone telefone2;
-            if (this.isDadoValido(pessoaReceita.getTelefone1())) {
+            if (this.isDadoValido(estabelecimentoHadoop.getTelefoneCompleto_01())) {
                 telefone2 = new Telefone();
                 telefone2.setPessoa(pessoa);
-                telefone2.setNrTelefone(pessoaReceita.getTelefone1());
+                telefone2.setNrTelefone(estabelecimentoHadoop.getTelefone_01());
                 telefone2.setDdd(new Ddd());
-                telefone2.getDdd().setCdDdd(Integer.parseInt(pessoaReceita.getDDD1()));
+                telefone2.getDdd().setCdDdd(Integer.parseInt(estabelecimentoHadoop.getDDD_01()));
                 telefone2.setTipoTelefone((TipoTelefone)this.genericCrudService.find(TipoTelefone.class, TipoTelefoneEnum.RECEITA_FEDERAL.getCodigo()));
                 telefone2.setPais(pessoa.getPais());
                 if (this.telefoneService.find(telefone2) == null) {
@@ -255,12 +306,12 @@ public class PessoaJuridicaService {
                 }
             }
 
-            if (this.isDadoValido(pessoaReceita.getTelefone2())) {
+            if (this.isDadoValido(estabelecimentoHadoop.getTelefoneCompleto_02())) {
                 telefone2 = new Telefone();
                 telefone2.setPessoa(pessoa);
-                telefone2.setNrTelefone(pessoaReceita.getTelefone2());
+                telefone2.setNrTelefone(estabelecimentoHadoop.getTelefone_02());
                 telefone2.setDdd(new Ddd());
-                telefone2.getDdd().setCdDdd(Integer.parseInt(pessoaReceita.getDDD2()));
+                telefone2.getDdd().setCdDdd(Integer.parseInt(estabelecimentoHadoop.getDDD_02()));
                 telefone2.setTipoTelefone((TipoTelefone)this.genericCrudService.find(TipoTelefone.class, TipoTelefoneEnum.RECEITA_FEDERAL.getCodigo()));
                 telefone2.setPais(pessoa.getPais());
                 if (this.telefoneService.find(telefone2) == null) {
@@ -273,15 +324,15 @@ public class PessoaJuridicaService {
             }
 
             String codCnae;
-            if (this.isDadoValido(pessoaReceita.getCEP())) {
+            if (this.isDadoValido(estabelecimentoHadoop.getCep())) {
                 Endereco endereco = new Endereco();
                 endereco.setPessoa(pessoa);
                 endereco.setTipoEndereco((TipoEndereco)this.genericCrudService.find(TipoEndereco.class, TipoEnderecoEnum.RECEITA_FEDERAL_PJ.getCodigo()));
-                codCnae = pessoaReceita.getCEP();
+                codCnae = estabelecimentoHadoop.getCep();
                 endereco.setLogradouro(this.logradouroService.findByCep(codCnae));
-                endereco.setDsComplementoEndereco(pessoaReceita.getComplemento());
-                endereco.setNrComplemento(pessoaReceita.getNumeroLogradouro());
-                endereco.setDsBairroEndereco(pessoaReceita.getBairro());
+                endereco.setDsComplementoEndereco(estabelecimentoHadoop.getComplementoEndereco());
+                endereco.setNrComplemento(estabelecimentoHadoop.getNumeroLogradouro());
+                endereco.setDsBairroEndereco(estabelecimentoHadoop.getBairro());
                 endereco.setServico(new Servico());
                 endereco.getServico().setIdServico(PessoaUtils.getIdServicoReceita());
                 if (this.enderecoService.find(endereco) == null) {
@@ -293,10 +344,10 @@ public class PessoaJuridicaService {
                 pessoa.setEmails(new ArrayList());
             }
 
-            if (this.isDadoValido(pessoaReceita.getEmail())) {
+            if (this.isDadoValido(estabelecimentoHadoop.getEmail())) {
                 Email email = new Email();
                 email.setPessoa(pessoa);
-                email.setDsEmail(pessoaReceita.getEmail());
+                email.setDsEmail(estabelecimentoHadoop.getEmail());
                 email.setStEmailPrincipal(BooleanEnum.SIM.getSigla());
                 email.setTipoEmail((TipoEmail)this.genericCrudService.find(TipoEmail.class, TipoEmailEnum.COMERCIAL.getCodigo()));
                 if (this.emailService.find(email) == null) {
@@ -307,17 +358,18 @@ public class PessoaJuridicaService {
             this.excluirCNAEsEmpresa(pj);
             pj.setCnaes(new ArrayList());
             PessoaJuridicaCnae cnae = new PessoaJuridicaCnae();
-            cnae.setCnae(this.cnaeService.pesquisarPorCodigo(pessoaReceita.getCNAEPrincipal()));
+            cnae.setCnae(this.cnaeService.pesquisarPorCodigo(estabelecimentoHadoop.getCnaePrincipal()));
+            
             if (cnae.getCnae() != null) {
                 cnae.setPessoaJuridica(pj);
                 cnae.setStCnae("P");
                 pj.getCnaes().add(cnae);
-                if (pessoaReceita.getCNAESecundario() != null) {
-                    String[] var10;
-                    int var9 = (var10 = pessoaReceita.getCNAESecundario()).length;
+                if (cnaeSecundarioHadoop.getCnaeSecundario() != null) {
+                    String var10;
+                    int var9 = (var10 = cnaeSecundarioHadoop.getCnaeSecundario()).length();
 
-                    for(int var8 = 0; var8 < var9; ++var8) {
-                        codCnae = var10[var8];
+                    for(int var8 = 0; var8 < var9;) {
+                        codCnae = var10.substring(0, 7);
                         if (!"0000000".equals(codCnae)) {
                             PessoaJuridicaCnae cnaeSec = new PessoaJuridicaCnae();
                             cnaeSec.setCnae(this.cnaeService.pesquisarPorCodigo(codCnae));
@@ -326,6 +378,7 @@ public class PessoaJuridicaService {
                                 cnaeSec.setStCnae("S");
                                 pj.getCnaes().add(cnaeSec);
                             }
+                            var8 = var8 + 7;
                         }
                     }
                 }
@@ -333,7 +386,7 @@ public class PessoaJuridicaService {
 
             return pj;
         } catch (Exception var12) {
-            throw new NegocioException("Erro ao tentar converter a empresa de cnpj: " + pessoaReceita.getCNPJ());
+			throw new NegocioException("Erro ao tentar converter a empresa de cnpj: "  + empresaHadoop.getCnpj() );
         }
     }
 

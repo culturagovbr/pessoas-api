@@ -1,17 +1,16 @@
 package br.gov.cultura.sistema.pessoa.service;
 
-import br.gov.cultura.sistema.model.corporativo.*;
-import br.gov.cultura.sistema.model.enums.corporativo.*;
-import br.gov.cultura.sistema.model.seguranca.Servico;
-import br.gov.cultura.sistema.pessoa.PessoaUtils;
-import br.gov.cultura.sistema.pessoa.exception.NegocioException;
-import br.gov.cultura.sistema.service.GenericCrudService;
-import br.gov.cultura.sistema.util.FormatadorUtils;
-import br.gov.cultura.sistema.util.ValidacaoUtils;
-import br.gov.fazenda.receita.infoconv.ws.cpf.ConsultarCPFSoap;
-import br.gov.fazenda.receita.infoconv.ws.cpf.ConsultarCPFSoapProxy;
-import br.gov.fazenda.receita.infoconv.ws.cpf.PessoaPerfil3;
-import br.gov.fazenda.receita.infoconv.ws.util.CertificateUtil;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -21,13 +20,46 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import br.gov.cidadania.hadoop.cpf.PessoaHadoop;
+import br.gov.cidadania.hadoop.cpf.PessoaHadoopDTODeserializer;
+import br.gov.cultura.sistema.model.corporativo.Ddd;
+import br.gov.cultura.sistema.model.corporativo.DocumentacaoPessoa;
+import br.gov.cultura.sistema.model.corporativo.Endereco;
+import br.gov.cultura.sistema.model.corporativo.Pais;
+import br.gov.cultura.sistema.model.corporativo.Pessoa;
+import br.gov.cultura.sistema.model.corporativo.PessoaFisica;
+import br.gov.cultura.sistema.model.corporativo.SituacaoCadastralPF;
+import br.gov.cultura.sistema.model.corporativo.Telefone;
+import br.gov.cultura.sistema.model.corporativo.TipoAbrangencia;
+import br.gov.cultura.sistema.model.corporativo.TipoEndereco;
+import br.gov.cultura.sistema.model.corporativo.TipoPessoa;
+import br.gov.cultura.sistema.model.corporativo.TipoSituacaoCadastralPF;
+import br.gov.cultura.sistema.model.corporativo.TipoTelefone;
+import br.gov.cultura.sistema.model.enums.corporativo.PaisEnum;
+import br.gov.cultura.sistema.model.enums.corporativo.TipoAbrangenciaEnum;
+import br.gov.cultura.sistema.model.enums.corporativo.TipoEnderecoEnum;
+import br.gov.cultura.sistema.model.enums.corporativo.TipoPessoaEnum;
+import br.gov.cultura.sistema.model.enums.corporativo.TipoTelefoneEnum;
+import br.gov.cultura.sistema.model.seguranca.Servico;
+import br.gov.cultura.sistema.pessoa.PessoaUtils;
+import br.gov.cultura.sistema.pessoa.exception.NegocioException;
+import br.gov.cultura.sistema.service.GenericCrudService;
+import br.gov.cultura.sistema.util.FormatadorUtils;
+import br.gov.cultura.sistema.util.ValidacaoUtils;
 
 @Stateless
 public class PessoaFisicaService {
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     @Inject
     private GenericCrudService genericCrudService;
     @Inject
@@ -93,52 +125,63 @@ public class PessoaFisicaService {
         List<PessoaFisica> list = this.genericCrudService.findWithNamedQuery("PessoaFisica.findByCpf", paramMap);
         PessoaFisica pessoa = list.isEmpty() ? null : (PessoaFisica)list.get(0);
         if (pessoa == null) {
-            pessoa = this.getPessoaWebServiceReceita(nrCpf, (PessoaFisica)null);
+            pessoa = this.getPessoaHadoop(nrCpf, (PessoaFisica)null);
         } else if (forcarBuscaNaReceita) {
-            pessoa = this.getPessoaWebServiceReceita(nrCpf, pessoa);
+            pessoa = this.getPessoaHadoop(nrCpf, pessoa);
         }
 
-        if (pessoa != null) {
-            this.genericCrudService.refresh(pessoa);
+        if (pessoa == null) {
+        	throw new NegocioException(PessoaUtils.getMsgPessoaFisicaNaoEncontradada());
+        } else {
+        	this.genericCrudService.refresh(pessoa);
             pessoa.getPessoa().setEnderecos(this.enderecoService.getEnderecos(pessoa.getPessoa(), servico));
         }
 
         return pessoa;
     }
 
-    private PessoaFisica getPessoaWebServiceReceita(String cpf, PessoaFisica pessoaFisicaBaseLocal) throws NegocioException {
-        PessoaFisica pessoaFisica = null;
-
-        String message;
+    private PessoaFisica getPessoaHadoop(String cpf, PessoaFisica pessoaFisicaBaseLocal) throws NegocioException {
+        
+    	PessoaFisica pessoaFisica = null;
+        String message = null;
+        
         try {
-            PessoaUtils.setSSLContextConfiguradoComCertificado();
-            ConsultarCPFSoap consultarCPFSoap = new ConsultarCPFSoapProxy();
-            message = null;
-            PessoaPerfil3[] pessoaReceita;
-            if (PessoaUtils.getEstagioProjeto().equalsIgnoreCase("producao")) {
-                pessoaReceita = consultarCPFSoap.consultarCPFP3(cpf, CertificateUtil.CPF_CONVENIO_SERPRO);
-            } else {
-                pessoaReceita = consultarCPFSoap.consultarCPFP3T(cpf, CertificateUtil.CPF_CONVENIO_SERPRO);
-            }
-
-            if (pessoaReceita.length > 0) {
-                if (ValidacaoUtils.isNotEmpty(pessoaReceita[0].getErro())) {
-                    throw new NegocioException(pessoaReceita[0].getErro());
-                }
-
-                pessoaFisica = this.converterPessoaFisica(pessoaReceita[0], pessoaFisicaBaseLocal);
-                this.cadastrarPessoaFisica(pessoaFisica, pessoaFisicaBaseLocal == null);
-            }
-
-            return pessoaFisica;
-        } catch (NegocioException var6) {
-            throw var6;
-        } catch (Exception var7) {
+			
+        	StringBuffer buffer = requisicao(cpf);
+			
+			final Gson gson = new GsonBuilder().registerTypeAdapter(PessoaHadoop.class, new PessoaHadoopDTODeserializer()).create();
+			PessoaHadoop pessoaHadoop = gson.fromJson(buffer.toString(), PessoaHadoop.class);
+			
+			if(pessoaHadoop != null) {
+				pessoaFisica = this.converterPessoaFisica(pessoaHadoop, pessoaFisicaBaseLocal);
+				this.cadastrarPessoaFisica(pessoaFisica, pessoaFisicaBaseLocal == null);
+			}
+			
+        } catch (NegocioException e) {            
+            throw new NegocioException(e.getMessage());        	
+        }catch (Exception var7) {
             message = "Erro ao tentar buscar informações na Receita Federal da pessoa de cpf: " + cpf;
             System.err.println(message);
-            throw new NegocioException(message);
+            throw new NegocioException(message);        	
         }
+		return pessoaFisica;
     }
+
+	private StringBuffer requisicao(String cpf) throws IOException, ClientProtocolException {
+		HttpClient client = new DefaultHttpClient();
+		HttpGet request = new HttpGet("http://tdhdp01en01.mds.net:8099/p_hbase.tb_cpf/" + cpf);
+		request.addHeader("Accept", "application/json");
+		HttpResponse response = client.execute(request);
+		
+		final BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		String inputLine;
+		StringBuffer buffer = new StringBuffer();
+		while ((inputLine = in.readLine()) != null) {
+			buffer.append(inputLine);
+		}
+		in.close();
+		return buffer;
+	}
 
     private void cadastrarPessoaFisica(PessoaFisica pessoaFisica, boolean isCadastro) throws NegocioException {
         try {
@@ -193,7 +236,7 @@ public class PessoaFisicaService {
         }
     }
 
-    private PessoaFisica converterPessoaFisica(PessoaPerfil3 pessoaReceita, PessoaFisica pessoaFisicaBaseLocal) throws NegocioException {
+    private PessoaFisica converterPessoaFisica(PessoaHadoop pessoahadoop, PessoaFisica pessoaFisicaBaseLocal) throws NegocioException {
         try {
             Pessoa pessoa = null;
             String pfTipo;
@@ -201,7 +244,7 @@ public class PessoaFisicaService {
                 pessoa = pessoaFisicaBaseLocal.getPessoa();
             } else {
                 pessoa = new Pessoa();
-                pfTipo = pessoaReceita.getResidenteExterior();
+                pfTipo = pessoahadoop.getResidenteExterior();
                 TipoAbrangenciaEnum tipoAbrangencia = "1".equalsIgnoreCase(pfTipo) ? TipoAbrangenciaEnum.BRASILEIRO_DOMILICIADO_EXTERIOR : TipoAbrangenciaEnum.BRASILEIRO;
                 pessoa.setTipoAbrangencia((TipoAbrangencia)this.genericCrudService.find(TipoAbrangencia.class, tipoAbrangencia.getCodigoAsString()));
                 pessoa.setTipoPessoa((TipoPessoa)this.genericCrudService.find(TipoPessoa.class, TipoPessoaEnum.FISICA.getCodigoAsString()));
@@ -217,25 +260,24 @@ public class PessoaFisicaService {
                 pf.setPessoa(pessoa);
             }
 
-            pf.setNmPessoaFisica(pessoaReceita.getNome());
-            pf.setNrCpf(pessoaReceita.getCPF());
-            pf.setNmMae(pessoaReceita.getNomeMae());
+            pf.setNmPessoaFisica(pessoahadoop.getNomePessoa());
+            pf.setNrCpf(pessoahadoop.getCpf());
+            pf.setNmMae(pessoahadoop.getNomeMaePessoa());
             pf.setDtNascimento(Calendar.getInstance());
-            pf.getDtNascimento().setTime(sdf.parse(pessoaReceita.getDataNascimento()));
-            int cdSexo = Integer.parseInt(pessoaReceita.getSexo());
-            pf.setSgSexo(cdSexo == 1 ? "M" : (cdSexo == 2 ? "F" : null));
-            pf.setTpSituacaoCadastral(pessoaReceita.getSituacaoCadastral());
-            pf.setTpResidenteExterior(pessoaReceita.getResidenteExterior());
+            pf.getDtNascimento().setTime(sdf.parse(pessoahadoop.getDataNascimento()));
+            pf.setSgSexo(pessoahadoop.getGenero());
+            pf.setTpSituacaoCadastral(pessoahadoop.getSituacaoCadastral());
+            pf.setTpResidenteExterior(pessoahadoop.getResidenteExterior());
             if (pessoa.getTelefones() == null) {
                 pessoa.setTelefones(new ArrayList());
             }
 
-            if (this.isDadoValido(pessoaReceita.getTelefone())) {
+            if (this.isDadoValido(pessoahadoop.getTelefoneCompleto())) {
                 Telefone telefone = new Telefone();
                 telefone.setPessoa(pessoa);
-                telefone.setNrTelefone(pessoaReceita.getTelefone());
+                telefone.setNrTelefone(pessoahadoop.getTelefone());
                 telefone.setDdd(new Ddd());
-                telefone.getDdd().setCdDdd(Integer.parseInt(pessoaReceita.getDDD()));
+                telefone.getDdd().setCdDdd(Integer.parseInt(pessoahadoop.getDDD()));
                 telefone.setTipoTelefone((TipoTelefone)this.genericCrudService.find(TipoTelefone.class, TipoTelefoneEnum.RECEITA_FEDERAL.getCodigo()));
                 telefone.setPais(pessoa.getPais());
                 if (this.telefoneService.find(telefone) == null) {
@@ -247,15 +289,15 @@ public class PessoaFisicaService {
                 pessoa.setEnderecos(new ArrayList());
             }
 
-            if (this.isDadoValido(pessoaReceita.getCEP())) {
+            if (this.isDadoValido(pessoahadoop.getCep())) {
                 Endereco endereco = new Endereco();
                 endereco.setPessoa(pessoa);
                 endereco.setTipoEndereco((TipoEndereco)this.genericCrudService.find(TipoEndereco.class, TipoEnderecoEnum.RECEITA_FEDERAL_PF.getCodigo()));
-                String cep = pessoaReceita.getCEP();
+                String cep = pessoahadoop.getCep();
                 endereco.setLogradouro(this.logradouroService.findByCep(cep));
-                endereco.setDsComplementoEndereco(pessoaReceita.getComplemento());
-                endereco.setNrComplemento(pessoaReceita.getNumeroLogradouro());
-                endereco.setDsBairroEndereco(pessoaReceita.getBairro());
+                endereco.setDsComplementoEndereco(pessoahadoop.getComplementoEndereco());
+                endereco.setNrComplemento(pessoahadoop.getNumeroLogradouro());
+                endereco.setDsBairroEndereco(pessoahadoop.getBairro());
                 endereco.setServico(new Servico());
                 endereco.getServico().setIdServico(PessoaUtils.getIdServicoReceita());
                 if (this.enderecoService.find(endereco) == null) {
@@ -266,12 +308,11 @@ public class PessoaFisicaService {
             if (pf.getDocumentacao() == null) {
                 pf.setDocumentacao(new DocumentacaoPessoa());
             }
-
-            pf.getDocumentacao().setNrTituloEleitor(pessoaReceita.getTituloEleitor());
+            
             return pf;
         } catch (Exception var8) {
             var8.printStackTrace();
-            throw new NegocioException("Erro ao tentar converter a pessoa de cpf: " + pessoaReceita.getCPF());
+            throw new NegocioException("Erro ao tentar converter a pessoa de cpf: " + pessoahadoop.getCpf());
         }
     }
 
