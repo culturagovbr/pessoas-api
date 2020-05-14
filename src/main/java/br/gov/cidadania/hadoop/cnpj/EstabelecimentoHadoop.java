@@ -95,7 +95,7 @@ public class EstabelecimentoHadoop implements Serializable {
 	public String getSituacaoCadastral() {
 		String situacao = SITUACAO_ATIVA_VALOR;
 		
-		switch (this.atributos.get("f:tp_situacao_cadastro")) {
+		switch (this.atributos.get("f:tp_sit_cadastro")) {
 		case SITUACAO_NULA:
 			situacao = SITUACAO_NULA_VALOR;
 			break;
