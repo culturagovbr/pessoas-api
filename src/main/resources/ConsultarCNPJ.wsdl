@@ -410,10 +410,10 @@
   </wsdl:binding>
   <wsdl:service name="ConsultarCNPJ">
     <wsdl:port name="ConsultarCNPJSoap" binding="tns:ConsultarCNPJSoap">
-      <soap:address location="https://infoconv.receita.fazenda.gov.br/ws/cnpj/ConsultarCNPJ.asmx" />
+      <soap:address location="https://infoconv.turismo.gov.br/infoconv-proxy/api/cnpj" />
     </wsdl:port>
     <wsdl:port name="ConsultarCNPJSoap12" binding="tns:ConsultarCNPJSoap12">
-      <soap12:address location="https://infoconv.receita.fazenda.gov.br/ws/cnpj/ConsultarCNPJ.asmx" />
+      <soap12:address location="https://infoconv.turismo.gov.br/infoconv-proxy/api/cnpj" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

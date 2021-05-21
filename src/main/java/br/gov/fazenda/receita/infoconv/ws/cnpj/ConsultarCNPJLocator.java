@@ -13,7 +13,7 @@ import org.apache.axis.client.Service;
 import org.apache.axis.client.Stub;
 
 public class ConsultarCNPJLocator extends Service implements ConsultarCNPJ {
-    private String ConsultarCNPJSoap_address = "https://infoconv.receita.fazenda.gov.br/ws/cnpj/ConsultarCNPJ.asmx";
+    private String ConsultarCNPJSoap_address = "https://infoconv.turismo.gov.br/infoconv-proxy/api/cnpj";
     private String ConsultarCNPJSoapWSDDServiceName = "ConsultarCNPJSoap";
     private HashSet ports = null;
 
